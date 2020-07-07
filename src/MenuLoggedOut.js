@@ -13,6 +13,9 @@ import VpnKeyTwoToneIcon from '@material-ui/icons/VpnKeyTwoTone';
 import EnhancedEncryptionTwoToneIcon from '@material-ui/icons/EnhancedEncryptionTwoTone';
 import SentimentSatisfiedTwoToneIcon from '@material-ui/icons/SentimentSatisfiedTwoTone';
 
+import TrialBalance from './TrialBalance';
+
+import App from './App';
 
 
 
@@ -70,6 +73,7 @@ function MenuLoggedOut() {
                     <Route path="/login" component={Login} />
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/aboutus" component={AboutUs} />
+                    <Route path="/trialbalance" component={TrialBalance} />
                 </Switch>
             </div>
            

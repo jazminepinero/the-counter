@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   Paper,
@@ -8,12 +8,21 @@ import {
 import VerifiedUserOutlined from "@material-ui/icons/VerifiedUserOutlined";
 
 import firebase from "./firebase";
-import { Link } from "react-router-dom";
+import { Link as RouteLink } from "react-router-dom";
 import { green } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
+import { Skeleton } from '@material-ui/lab';
 
 
 function Dashboard(props) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect (() => {
+    setTimeout (() => {
+      setIsLoaded(true);
+    }, 3000);
+  }, []);
+
+  
  
   const useStyles = makeStyles((theme) => ({
     main: {
@@ -49,8 +58,15 @@ function Dashboard(props) {
     }
   }));
   const classes = useStyles();
-
+ // if(!firebase.getCurrentUsername()) {
+		// not logged in
+	//	alert('Please login first')
+	//	props.history.replace('/')
+		
+//	}
   
+
+
 
 
     
@@ -64,14 +80,14 @@ function Dashboard(props) {
         <Typography component="h1" variant="h5" gutterBottom>
           Hello {firebase.getCurrentUsername()}
         </Typography>
+        <Skeleton variant="text" />
         <Typography variant="subtitle" gutterBottom>
           This is the dashboard
         </Typography>
         <Button
           type="submit"
           fullWidth
-          variant="contained"
-          color="secondary"
+          style={{ color: green[500] }}
           onClick={logout}
           className={classes.submit}
         >
@@ -81,8 +97,8 @@ function Dashboard(props) {
            type="submit"
            fullWidth
            style={{ color: green[500] }}
-           component={Link}
-           to="/billlist"
+           component={RouteLink}
+           to="/trialbalance"
            className={classes.submit}
         >
           To software

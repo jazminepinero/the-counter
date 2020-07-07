@@ -13,14 +13,25 @@ import { Link } from "react-router-dom";
 import EnhancedEncryptionTwoToneIcon from '@material-ui/icons/EnhancedEncryptionTwoTone';
 import { green } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
+import firebase from './firebase'
 
 
 
 
-function Login() {
+function Login(props) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    firebase
+      .login(email, password)
+      .then(props.history.push("/dashboard"))
+      .catch(err => alert(err));
+  };
+
+
   const useStyles = makeStyles((theme) => ({
     main: {
       width: "auto",
@@ -55,6 +66,7 @@ function Login() {
     }
   }));
   const classes = useStyles();
+  
 
   return (
     <main className={classes.main}>
@@ -67,7 +79,7 @@ function Login() {
         </Typography>
         <form
           className={classes.form}
-          onSubmit={e => e.preventDefault() && false}
+          onSubmit={handleSubmit}
         >
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -116,7 +128,8 @@ function Login() {
     </main>
   );
 
-  
+ 
+
 }
 
 
